@@ -73,7 +73,7 @@ const FoodDetails: React.FC = () => {
 
   useEffect(() => {
     async function loadFood(): Promise<void> {
-      const { data } = await api.get<Food>(`/foods/${routeParams.id}`);
+      const { data } = await api.get(`/foods/${routeParams.id}`);
       setFood(data);
       setExtras(state =>
         data.extras.map(extra => ({
@@ -145,7 +145,15 @@ const FoodDetails: React.FC = () => {
   }, [extras, food, foodQuantity]);
 
   async function handleFinishOrder(): Promise<void> {
-    // await api.post('/orders')
+    await api.post('/orders', {
+      product_id: food.id,
+      name: food.name,
+      description: food.description,
+      price: food.price,
+      category: food,
+      thumbnail_url: food.image_url,
+      extras,
+    });
   }
 
   // Calculate the correct icon name
