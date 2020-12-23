@@ -128,7 +128,7 @@ const FoodDetails: React.FC = () => {
   }
 
   const toggleFavorite = useCallback(() => {
-    // Toggle if food is favorite or not
+    setIsFavorite(!isFavorite);
   }, [isFavorite, food]);
 
   const cartTotal = useMemo(() => {
